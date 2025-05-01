@@ -51,64 +51,71 @@
 
         <!-- SECTION 2: GAME PAGE -->
         <div id="gamePage" class="text-center invisible">
-            <div class="row">
-                <div class="col-12 mb-4">
-                    <h1><span id="playerName1"></span> vs Cyborg</h1>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <p>first to get to 5 wins!</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <p class="h3">Make your choice</p>
-                </div>
-            </div>
-
-            <div class="row px-3 my-4 mx-auto">
-                <div class="col-4">
-                    <i class="fas fa-hand-rock choiceIcons" id="rockOption"></i>
-                </div>
-                <div class="col-4">
-                    <i class="fas fa-hand-paper choiceIcons" id="paperOption"></i>
-                </div>
-                <div class="col-4">
-                    <i class="fas fa-hand-scissors fa-rotate-90 choiceIcons" id="scissorsOption"></i>
-                </div>
-            </div>
-
-            <div class="row px -3 my-4 mx-auto invisible" id="shakyHands">
-                <div class="col-6">
-                    <i class="fas fa-hand-rock fa-rotate-90 choiceIcons"></i>
-                </div>
-                <div class="col-6">
-                    <span class="fa-rotate-90" style="display: inline-block;">
-                        <i class="fas fa-hand-rock fa-flip-vertical choiceIcons"></i>
-                    </span>
-                </div>
-            </div>
-
-            <div class="row pt-4" id="resultDisplay">
-                <div class="col-6">
-                    <p class="h4 invisible" id="playerScores">You: <span id="playerCountNumber">0</span></p>
-                    <div id="playerChoice">
+            <div>
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <h1><span id="playerName1"></span> vs Cyborg</h1>
                     </div>
                 </div>
-                <div class="col-6">
-                    <p class="h4 invisible" id="computerScores">Cyborg: <span id="computerCountNumber">0</span></p>
-                    <div id="computerChoice">
+    
+                <div class="row">
+                    <div class="col-12">
+                        <p>first to get to 5 wins!</p>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-12">
+                        <p class="h3">Make your choice</p>
+                    </div>
+                </div>
+    
+                <div class="row px-3 my-4 mx-auto">
+                    <div class="col-4">
+                        <i class="fas fa-hand-rock choiceIcons" id="rockOption"></i>
+                    </div>
+                    <div class="col-4">
+                        <i class="fas fa-hand-paper choiceIcons" id="paperOption"></i>
+                    </div>
+                    <div class="col-4">
+                        <i class="fas fa-hand-scissors fa-rotate-90 choiceIcons" id="scissorsOption"></i>
+                    </div>
+                </div>
+    
+                <div class="row px -3 my-4 mx-auto invisible" id="shakyHands">
+                    <div class="col-6">
+                        <i class="fas fa-hand-rock fa-rotate-90 choiceIcons"></i>
+                    </div>
+                    <div class="col-6">
+                        <span class="fa-rotate-90" style="display: inline-block;">
+                            <i class="fas fa-hand-rock fa-flip-vertical choiceIcons"></i>
+                        </span>
+                    </div>
+                </div>
+    
+                <div class="row pt-4" id="resultDisplay">
+                    <div class="col-6">
+                        <p class="h4 invisible" id="playerScores">You: <span id="playerCountNumber">0</span></p>
+                        <div id="playerChoice">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <p class="h4 invisible" id="computerScores">Cyborg: <span id="computerCountNumber">0</span></p>
+                        <div id="computerChoice">
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row mt-4" id="resultInfo">
+                    <div class="col-12">
+                        <p class="h5"><span id="resultVariable"></span><br><span id="resultText"></span></p>
                     </div>
                 </div>
             </div>
+            
 
-            <div class="row mt-4" id="resultInfo">
-                <div class="col-12">
-                    <p class="h5"><span id="resultVariable"></span><br><span id="resultText"></span></p>
-                </div>
+            <div class="footer">
+                <p>Copyright © <a href="https://github.com/AndreUdotai/rock-paper-scissors" target="_blank" rel="noopener noreferrer">Andre Udotai</a> 2025</p>
             </div>
 
         </div>
