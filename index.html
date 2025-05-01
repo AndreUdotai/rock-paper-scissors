@@ -1,179 +1,165 @@
 <!doctype html>
 <html lang="eng">
-    <head>
 
-        <!-- <script src="https://use.fontawesome.com/64b8cce70b.js"></script> -->
+<head>
 
-        <!-- GENERAL INFO -->
-        <title>Rock Paper Scissors</title>
-        <meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Find out weather conditions about your favourite places on the map!">
+    <!-- <script src="https://use.fontawesome.com/64b8cce70b.js"></script> -->
 
-        <!-- Change the mobile browser's viewport width -->
-        <meta name="viewport" content="width=320" />
-        
-        <!-- Sets the viewport to the same width as the screen to obtain readable render without zooming-->
-        <meta name="viewport" content="width=device-width" />
-        
-        <!-- LINKS TO CSS FILE ("STYLESHEET") AND SITE ICON -->
-        <link href="styles.css" type="text/css" rel="stylesheet">
+    <!-- GENERAL INFO -->
+    <title>Rock Paper Scissors</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Find out weather conditions about your favourite places on the map!">
 
-        <!-- LINK TO FONT AWESOME -->
-        <link rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-            integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
-            crossorigin="anonymous">
+    <!-- Change the mobile browser's viewport width -->
+    <meta name="viewport" content="width=320" />
 
+    <!-- Sets the viewport to the same width as the screen to obtain readable render without zooming-->
+    <meta name="viewport" content="width=device-width" />
 
-        <!-- LINK TO BOOTSTRAP -->
-        <link rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-            crossorigin="anonymous"/>
-  
-    </head>
-    <body>
-        <div class="container mt-4">
+    <!-- LINKS TO CSS FILE ("STYLESHEET") AND SITE ICON -->
+    <link href="styles.css" type="text/css" rel="stylesheet">
 
-            <!-- SECTION 1: LANDING PAGE -->
-            <div  id="landingPage" class="text-center">
-                <div class="row header">
-                    <div class="col-12 mb-2">
-                        <h1>BEAT AN AI MACHINE</h1>
-                        <h4>IN A ROCK PAPER SCISSORS GAME</h4>
-                    </div>
-                </div>
-                <div class="row px-5 mb-4" id="description">
-                    <div class="col-12">
-                        <p>
-                            (New to the rock scissors paper game? Watch how to play it <a href="https://www.youtube.com/watch?v=F4uQssMXO38" target=”_blank”><u>here.</u></a>) 
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <input type="text"  class="form-control w-50 mx-auto my-2" placeholder="Your name.." id="nameInput">
-                        <button type="button" class="btn btn-primary button mt-4" id="nameSubmitButton">Continue...</button>
-                    </div>                
-                </div>
-                <div class="row">
-                    <div class="col-12 mt-3">
-                        <p id="nameAlert"></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION 2: GAME PAGE -->
-            <div id="gamePage" class="text-center invisible">
-                <div class="row">
-                    <div class="col-12 mb-4">
-                        <h1><span id="playerName1"></span> vs Cyborg</h1>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <p>first to get to 5 wins!</p>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <p class="h3">Make your choice</p>
-                    </div>
-                </div>
-                
-                <div class="row px-3 my-4 mx-auto">
-                    <div class="col-4">
-                        <i class="fas fa-hand-rock choiceIcons" id="rockOption"></i>
-                    </div>
-                    <div class="col-4">
-                        <i class="fas fa-hand-paper choiceIcons" id="paperOption"></i>
-                    </div>
-                    <div class="col-4">
-                        <i class="fas fa-hand-scissors fa-rotate-90 choiceIcons" id="scissorsOption"></i>
-                    </div>
-                </div>
-
-                <div class="row px -3 my-4 mx-auto invisible" id="shakyHands">
-                    <div class="col-6">
-                        <i class="fas fa-hand-rock fa-rotate-90 choiceIcons"></i>
-                    </div>
-                    <div class="col-6">
-                        <span class="fa-rotate-90" style="display: inline-block;">
-                            <i class="fas fa-hand-rock fa-flip-vertical choiceIcons"></i>
-                        </span>
-                    </div>
-                </div>                
-
-                <div class="row pt-4" id="resultDisplay">
-                    <div class="col-6">
-                        <p class="h4 invisible" id="playerScores">You: <span id="playerCountNumber">0</span></p>
-                        <div id="playerChoice">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <p class="h4 invisible" id="computerScores">Cyborg: <span id="computerCountNumber">0</span></p>
-                        <div id="computerChoice">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-4" id="resultInfo">
-                    <div class="col-12">
-                        <p class="h5"><span id="resultVariable"></span><br><span id="resultText"></span></p>
-                    </div>
-                </div>
-
-            </div>
+    <!-- LINK TO FONT AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
 
-            <!-- SECTION 3: WIN RESULT PAGE -->
-            <div id="winResultPage" class="text-center invisible">
-                <div class="row text-center">
-                    <div class="col-12">
-                        <h1><span id="playerName2"></span> vs Cyborg</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 resultMessage">
-                        <p class="h4">You won! AI can never overtake man...</p>
-                    </div>
-                </div>
+    <!-- LINK TO BOOTSTRAP -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+</head>
+
+<body>
+    <div>
+
+        <!-- SECTION 1: LANDING PAGE -->
+        <div id="landingPage">
+            <div>
                 <div>
-                    <div class="col-12">
-                        <button type="button" class="btn btn-primary button" id="winRestart">Restart...</button>
+                    <h1>BEAT AN AI MACHINE</h1>
+                    <h4>IN A ROCK PAPER SCISSORS GAME</h4>
+                </div>
+                <input type="text" placeholder="Your name.." id="nameInput">
+                <button type="button" id="nameSubmitButton">Continue...</button>
+            </div>
+            <div class="footer">
+                <p>Copyright © <a href="https://github.com/AndreUdotai/landing-page" target="_blank" rel="noopener noreferrer">Andre Udotai</a> 2025</p>
+            </div>
+        </div>
+
+        <!-- SECTION 2: GAME PAGE -->
+        <div id="gamePage" class="text-center invisible">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <h1><span id="playerName1"></span> vs Cyborg</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <p>first to get to 5 wins!</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <p class="h3">Make your choice</p>
+                </div>
+            </div>
+
+            <div class="row px-3 my-4 mx-auto">
+                <div class="col-4">
+                    <i class="fas fa-hand-rock choiceIcons" id="rockOption"></i>
+                </div>
+                <div class="col-4">
+                    <i class="fas fa-hand-paper choiceIcons" id="paperOption"></i>
+                </div>
+                <div class="col-4">
+                    <i class="fas fa-hand-scissors fa-rotate-90 choiceIcons" id="scissorsOption"></i>
+                </div>
+            </div>
+
+            <div class="row px -3 my-4 mx-auto invisible" id="shakyHands">
+                <div class="col-6">
+                    <i class="fas fa-hand-rock fa-rotate-90 choiceIcons"></i>
+                </div>
+                <div class="col-6">
+                    <span class="fa-rotate-90" style="display: inline-block;">
+                        <i class="fas fa-hand-rock fa-flip-vertical choiceIcons"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row pt-4" id="resultDisplay">
+                <div class="col-6">
+                    <p class="h4 invisible" id="playerScores">You: <span id="playerCountNumber">0</span></p>
+                    <div id="playerChoice">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <p class="h4 invisible" id="computerScores">Cyborg: <span id="computerCountNumber">0</span></p>
+                    <div id="computerChoice">
                     </div>
                 </div>
             </div>
 
-            <!-- SECTION 4: LOSE RESULT PAGE -->
-            <div id="loseResultPage" class="text-center invisible">
-                <div class="row text-center">
-                    <div class="col-12 mt-4">
-                        <h1><span id="playerName3"></span> vs Cyborg</h1>
-                    </div>
+            <div class="row mt-4" id="resultInfo">
+                <div class="col-12">
+                    <p class="h5"><span id="resultVariable"></span><br><span id="resultText"></span></p>
                 </div>
-                <div class="row resultMessage">
-                    <div class="col-12">
-                        <p class="h4">You lost! Cyborg will have your head for dinner...</p>
-                    </div>
+            </div>
+
+        </div>
+
+
+        <!-- SECTION 3: WIN RESULT PAGE -->
+        <div id="winResultPage" class="text-center invisible">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h1><span id="playerName2"></span> vs Cyborg</h1>
                 </div>
-                <div>
-                    <div class="col-12">
-                        <button type="button" class="btn btn-primary button" id="loseRestart">Restart...</button>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-12 resultMessage">
+                    <p class="h4">You won! AI can never overtake man...</p>
+                </div>
+            </div>
+            <div>
+                <div class="col-12">
+                    <button type="button" class="btn btn-primary button" id="winRestart">Restart...</button>
                 </div>
             </div>
         </div>
-        
-        <div class="row pb-4">
+
+        <!-- SECTION 4: LOSE RESULT PAGE -->
+        <div id="loseResultPage" class="text-center invisible">
+            <div class="row text-center">
+                <div class="col-12 mt-4">
+                    <h1><span id="playerName3"></span> vs Cyborg</h1>
+                </div>
+            </div>
+            <div class="row resultMessage">
+                <div class="col-12">
+                    <p class="h4">You lost! Cyborg will have your head for dinner...</p>
+                </div>
+            </div>
+            <div>
+                <div class="col-12">
+                    <button type="button" class="btn btn-primary button" id="loseRestart">Restart...</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row pb-4">
             <class class="col-12 fixed-bottom text-center">
                 <footer>Copyright © 2021 Andre Udotai</footer>
             </class>
-        </div>
+        </div> -->
 
-        <script src="main.js" type="text/javascript"></script>
-    </body>
+    <script src="main.js" type="text/javascript"></script>
+</body>
+
 </html>
