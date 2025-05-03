@@ -48,8 +48,8 @@ nameSubmitButton.addEventListener('click', () => {
     gamePage.classList.remove('invisible');
 });
 
-//Generates random choices for Cyborg
-let computerPlay = () => {
+//Generates random choices for Computer
+let getComputerChoice = () => {
     switch (Math.floor(Math.random() * (3) + 1)){
         case 1:
             return 'rock';
@@ -67,8 +67,8 @@ let computerPlay = () => {
 rockOption.addEventListener('click', () => {
     // assigns the 'Rock' to playerOpton variable
     playerOpton = 'rock';
-    // assigns the random value from computerPlay function to computerOpton variable
-    computerOpton = computerPlay();
+    // assigns the random value from getComputerChoice function to computerOpton variable
+    computerOpton = getComputerChoice();
 
     // Makes the resultDisplay and resultInfo elements invisible in the DOM
     resultDisplay.classList.add('invisible');
@@ -93,8 +93,8 @@ rockOption.addEventListener('click', () => {
 paperOption.addEventListener('click', () => {
     // assigns the 'Paper' to playerOpton variable 
     playerOpton = 'paper';
-    // assigns the random value from computerPlay function to computerOpton variable
-    computerOpton = computerPlay();
+    // assigns the random value from getComputerChoice function to computerOpton variable
+    computerOpton = getComputerChoice();
 
     // Makes the resultDisplay and resultInfo elements invisible in the DOM
     resultDisplay.classList.add('invisible');
@@ -120,8 +120,8 @@ scissorsOption.addEventListener('click', () => {
     // assigns the 'scissors' to playerOpton variable
     playerOpton = 'scissors';
 
-    // assigns the random value from computerPlay function to computerOpton variable
-    computerOpton = computerPlay();
+    // assigns the random value from getComputerChoice function to computerOpton variable
+    computerOpton = getComputerChoice();
 
     // Makes the resultDisplay and resultInfo elements invisible in the DOM
     resultDisplay.classList.add('invisible');
