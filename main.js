@@ -1,15 +1,13 @@
 let nameInput = document.getElementById('nameInput');
 let nameSubmitButton = document.getElementById('nameSubmitButton');
-let playerName1 = document.getElementById('playerName1');
-let playerName2 = document.getElementById('playerName2');
-let playerName3 = document.getElementById('playerName3');
+let humanName = document.getElementById('humanName');
 let gamePage = document.getElementById('gamePage');
 let landingPage = document.getElementById('landingPage');
 let nameAlert = document.getElementById('nameAlert');
 let resultText = document.getElementById('resultText');
 let resultVariable = document.getElementById('resultVariable');
-let playerScores = document.getElementById('playerScores');
-let computerScores = document.getElementById('computerScores');
+let humanScoreDisplay = document.getElementById('humanScoreDisplay');
+let computerScoreDisplay = document.getElementById('computerScoreDisplay');
 let playerCountNumber = document.getElementById('playerCountNumber');
 let computerCountNumber = document.getElementById('computerCountNumber');
 let winResultPage = document.getElementById('winResultPage');
@@ -23,23 +21,20 @@ let resultDisplay = document.getElementById('resultDisplay');
 let resultInfo = document.getElementById('resultInfo');
 
 let humanOptions = document.getElementById('humanOptions');
-// let rockOption          = document.getElementById('rockOption');
-// let paperOption         = document.getElementById('paperOption');
-// let scissorsOption      = document.getElementById('scissorsOption');
 
 let playerChoiceDisplay = document.getElementById('playerChoice');
 let computerChoiceDisplay = document.getElementById('computerChoice');
 
 let humanChoice;
 let computerChoice;
+let humanScore = 0;
+let computerScore = 0;
 let result;
-let playerCounter = 0;
-let computerCounter = 0;
 
 // Logic after clicking the 'continue' button
 nameSubmitButton.addEventListener('click', () => {
     // playerName is made to appear in the game page
-    playerName1.innerText = nameInput.value;
+    humanName.innerText = nameInput.value;
 
     //makes the landing page to disappear from DOM
     landingPage.classList.add('invisible');
@@ -48,7 +43,7 @@ nameSubmitButton.addEventListener('click', () => {
     gamePage.classList.remove('invisible');
 });
 
-// The function generates a random number between 1 and 3, 
+// The function generates a random number between 1 and 3,
 // and assigns the corresponding choice to computerChoice
 let getComputerChoice = () => {
     // let computerChoice
@@ -86,91 +81,32 @@ humanOptions.addEventListener('click', function (event) {
         }
 
         humanChoice = choice;
-        console.log('Human choice is: ' + humanChoice);
+
+        getComputerChoice();
+
+        // Makes the resultDisplay and resultInfo elements invisible in the DOM
+        resultDisplay.classList.add('invisible');
+        resultInfo.classList.add('invisible');
+
+        // Makes shakyHands element appear in the DOM
+        shakyHands.classList.remove('invisible');
+        // Removes shakyHands element from the DOM after 1s
+        removeShakyHands();
+
+        // Makes the humanScoreDisplay and computerScoreDisplay appear in the DOM after 1s
+        displayScores();
+
+        // controls the display of choice icons, scores and result messages
+        playRound(humanChoice, computerChoice);
+
+        // Makes the result appear after shakyHands disappear from the DOM
+        displayResult();
     }
 });
 
-// When player chooses Rock icon
-rockOption.addEventListener('click', () => {
-    // assigns the 'Rock' to playerChoice variable
-    playerChoice = 'rock';
-
-    // getHumanChoice();
-
-    getComputerChoice();
-
-    // Makes the resultDisplay and resultInfo elements invisible in the DOM
-    resultDisplay.classList.add('invisible');
-    resultInfo.classList.add('invisible');
-
-    // Makes shakyHands element appear in the DOM
-    shakyHands.classList.remove('invisible');
-    // Removes shakyHands element from the DOM after 1s
-    removeShakyHands();
-
-    // Makes the playerScores and computerScores appear in the DOM after 1s
-    displayScores();
-
-    // controls the display of choice icons, scores and result messages
-    playRound(playerChoice, computerChoice);
-
-    // Makes the result appear after shakyHands disappear from the DOM
-    displayResult();
-});
-
-// When player chooses paper icon
-paperOption.addEventListener('click', () => {
-    // assigns the 'Paper' to playerChoice variable
-    playerChoice = 'paper';
-
-    getComputerChoice();
-
-    // Makes the resultDisplay and resultInfo elements invisible in the DOM
-    resultDisplay.classList.add('invisible');
-    resultInfo.classList.add('invisible');
-
-    // Makes shakyHands element appear in the DOM
-    shakyHands.classList.remove('invisible');
-    // Removes shakyHands element from the DOM after 1s
-    removeShakyHands();
-
-    // Makes the playerScores and computerScores appear in the DOM after 1s
-    displayScores();
-
-    // controls the display of choice icons, scores and result messages
-    playRound(playerChoice, computerChoice);
-
-    // Makes the result appear after shakyHands disappear from the DOM
-    displayResult();
-});
-
-// When player chooses scissors option
-scissorsOption.addEventListener('click', () => {
-    // assigns the 'scissors' to playerChoice variable
-    playerChoice = 'scissors';
-
-    getComputerChoice();
-
-    // Makes the resultDisplay and resultInfo elements invisible in the DOM
-    resultDisplay.classList.add('invisible');
-    resultInfo.classList.add('invisible');
-
-    // Makes shakyHands element appear in the DOM
-    shakyHands.classList.remove('invisible');
-    // Removes shakyHands element from the DOM after 1s
-    removeShakyHands();
-
-    // Makes the playerScores and computerScores appear in the DOM after 1s
-    displayScores();
-
-    // controls the display of choice icons, scores and result messages
-    playRound(playerChoice, computerChoice);
-
-    // Makes the result appear after shakyHands disappear from the DOM
-    displayResult();
-});
-
-//
+// The function plays a round of the game based on the player's choice and the computer's choice
+// It updates the score and displays the result message accordingly
+// It also checks for win/lose conditions and updates the UI accordingly
 let playRound = (playerChoice, computerChoice) => {
     // Assigns playerChoiceDisplay and computerChoiceDisplay icons to the elements' innerHTML
     playerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${playerChoice} fa-flip-horizontal choiceIcons"></i>`;
@@ -184,31 +120,29 @@ let playRound = (playerChoice, computerChoice) => {
         (playerChoice === 'scissors' && computerChoice === 'paper') ||
         (playerChoice === 'paper' && computerChoice === 'rock')
     ) {
-        if (playerCounter === 4) {
+        if (humanScore === 4) {
             gamePage.classList.add('invisible');
             winResultPage.classList.remove('invisible');
-            playerName2.innerText = nameInput.value;
+            // playerName2.innerText = nameInput.value;
         }
         resultText.innerText = `You won! ${playerChoice} beats ${computerChoice}`;
-        playerCounter++;
-        playerCountNumber.innerText = `${playerCounter}`;
+        humanScore++;
+        playerCountNumber.innerText = `${humanScore}`;
     } else if (
         (computerChoice === 'rock' && playerChoice === 'scissors') ||
         (computerChoice === 'scissors' && playerChoice === 'paper') ||
         (computerChoice === 'paper' && playerChoice === 'rock')
     ) {
-        if (computerCounter === 4) {
+        if (computerScore === 4) {
             gamePage.classList.add('invisible');
             loseResultPage.classList.remove('invisible');
-            playerName3.innerText = nameInput.value;
+            // playerName3.innerText = nameInput.value;
         }
         resultText.innerText = `You lost! ${computerChoice} beats ${playerChoice}`;
-        computerCounter++;
-        computerCountNumber.innerText = `${computerCounter}`;
+        computerScore++;
+        computerCountNumber.innerText = `${computerScore}`;
     }
-    scoresMessages(playerCounter, computerCounter);
-    // console.log('computer choice is: ' + computerChoice);
-    // console.log('player choice is: ' + humanChoice);
+    scoresMessages(humanScore, computerScore);
 };
 
 //the restart button after winning the game
@@ -218,12 +152,12 @@ winRestart.addEventListener('click', () => {
     playerChoiceDisplay.innerHTML = '';
     computerChoiceDisplay.innerHTML = '';
     resultText.innerText = '';
-    playerCounter = 0;
-    computerCounter = 0;
+    humanScore = 0;
+    computerScore = 0;
     playerCountNumber.innerText = '';
     computerCountNumber.innerText = '';
-    playerScores.classList.add('invisible');
-    computerScores.classList.add('invisible');
+    humanScoreDisplay.classList.add('invisible');
+    computerScoreDisplay.classList.add('invisible');
     resultVariable.innerText = '';
 });
 
@@ -234,12 +168,12 @@ loseRestart.addEventListener('click', () => {
     playerChoiceDisplay.innerHTML = '';
     computerChoiceDisplay.innerHTML = '';
     resultText.innerText = '';
-    playerCounter = 0;
-    computerCounter = 0;
+    humanScore = 0;
+    computerScore = 0;
     playerCountNumber.innerText = '';
     computerCountNumber.innerText = '';
-    playerScores.classList.add('invisible');
-    computerScores.classList.add('invisible');
+    humanScoreDisplay.classList.add('invisible');
+    computerScoreDisplay.classList.add('invisible');
     resultVariable.innerText = '';
 });
 
@@ -277,11 +211,11 @@ let removeShakyHands = () => {
     }, 1000);
 };
 
-// Makes playerScores and computerScores elements appear on the DOM after 1s
+// Makes humanScoreDisplay and computerScoreDisplay elements appear on the DOM after 1s
 let displayScores = () => {
     setTimeout(() => {
-        playerScores.classList.remove('invisible');
-        computerScores.classList.remove('invisible');
+        humanScoreDisplay.classList.remove('invisible');
+        computerScoreDisplay.classList.remove('invisible');
     }, 1000);
 };
 
