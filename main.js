@@ -14,17 +14,14 @@ let winResultPage = document.getElementById('winResultPage');
 let loseResultPage = document.getElementById('loseResultPage');
 let winRestart = document.getElementById('winRestart');
 let loseRestart = document.getElementById('loseRestart');
-
 let shakyHands = document.getElementById('shakyHands');
-
 let resultDisplay = document.getElementById('resultDisplay');
 let resultInfo = document.getElementById('resultInfo');
-
 let humanOptions = document.getElementById('humanOptions');
-
 let playerChoiceDisplay = document.getElementById('playerChoice');
 let computerChoiceDisplay = document.getElementById('computerChoice');
 
+// Variables to store human and computer choices and scores
 let humanChoice;
 let computerChoice;
 let humanScore = 0;
@@ -33,21 +30,18 @@ let result;
 
 // The function handles human name display and game page transition
 nameSubmitButton.addEventListener('click', () => {
-    if(nameInput.value === '') {
+    if (nameInput.value === '') {
         humanNameDisplay.innerText = 'Anon';
     } else {
         humanNameDisplay.innerText = nameInput.value;
     }
-
-    //makes the landing page to disappear from DOM
+    //Hide landing page from view
     landingPage.classList.add('invisible');
-
-    //makes the game page appear in DOM
+    //Display game page
     gamePage.classList.remove('invisible');
 });
 
-// The function generates a random number between 1 and 3,
-// and assigns the corresponding choice to computerChoice
+// The function generates a random number between 1 and 3 for computer choice
 let getComputerChoice = () => {
     let randomNumberBetween1and3 = Math.floor(Math.random() * 3 + 1);
     if (randomNumberBetween1and3 === 1) {
@@ -60,9 +54,8 @@ let getComputerChoice = () => {
     return computerChoice;
 };
 
-// The function listens for a click event on the humanOptions element to determine the player's choice
-// and assigns the corresponding choice to humanChoice
-humanOptions.addEventListener('click', function (event) {
+// The function gets the human choice based on the clicked element
+let getHumanChoice = () => {
     // Check if the clicked element is one of the choice icons
     const clickedElement = event.target;
     if (clickedElement.classList.contains('choiceIcons')) {
@@ -83,31 +76,23 @@ humanOptions.addEventListener('click', function (event) {
         }
 
         humanChoice = choice;
-        getComputerChoice();
-
-        // Makes the resultDisplay and resultInfo elements invisible in the DOM
-        resultDisplay.classList.add('invisible');
-        resultInfo.classList.add('invisible');
-
-        // Makes shakyHands element appear in the DOM
-        shakyHands.classList.remove('invisible');
-        // Removes shakyHands element from the DOM after 1s
-        removeShakyHands();
-
-        // Makes the humanScoreDisplay and computerScoreDisplay appear in the DOM after 1s
-        displayScores();
-
-        // controls the display of choice icons, scores and result messages
-        playRound(humanChoice, computerChoice);
-
-        // Makes the result appear after shakyHands disappear from the DOM
-        displayResult();
     }
-});
+    return humanChoice;
+};
 
-// The function plays a round of the game based on the player's choice and the computer's choice
-// It updates the score and displays the result message accordingly
-// It also checks for win/lose conditions and updates the UI accordingly
+// The function handles the click event on human options
+let handleHumanOptionsClick = (event) => {
+    getHumanChoice();
+    getComputerChoice();
+
+    // controls the display of choice icons, scores and result messages
+    playRound(humanChoice, computerChoice);
+};
+
+// The function listens for a click event on the humanOptions element to run the game
+humanOptions.addEventListener('click', handleHumanOptionsClick);
+
+// The function plays a round of the game and updates the score and displays the result message accordingly
 let playRound = (playerChoice, computerChoice) => {
     // Assigns playerChoiceDisplay and computerChoiceDisplay icons to the elements' innerHTML
     playerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${playerChoice} fa-flip-horizontal choiceIcons"></i>`;
@@ -124,10 +109,10 @@ let playRound = (playerChoice, computerChoice) => {
         (playerChoice === 'paper' && computerChoice === 'rock')
     ) {
         if (humanScore === 4) {
-            setTimeout(function() {
+            setTimeout(function () {
                 gamePage.classList.add('invisible');
                 loseResultPage.classList.remove('invisible');
-              }, 2000);
+            }, 2000);
         }
         resultText.innerText = `You won! ${playerChoice} beats ${computerChoice}`;
         humanScore++;
@@ -138,36 +123,36 @@ let playRound = (playerChoice, computerChoice) => {
         (computerChoice === 'paper' && playerChoice === 'rock')
     ) {
         if (computerScore === 4) {
-            setTimeout(function() {
+            setTimeout(function () {
                 gamePage.classList.add('invisible');
                 loseResultPage.classList.remove('invisible');
-              }, 2000);
+            }, 2000);
         }
         resultText.innerText = `You lost! ${computerChoice} beats ${playerChoice}`;
         computerScore++;
         computerCountNumber.innerText = `${computerScore}`;
     }
     scoresMessages(humanScore, computerScore);
+    // Makes the resultDisplay and resultInfo elements invisible in the DOM
+    resultDisplay.classList.add('invisible');
+    resultInfo.classList.add('invisible');
+
+    // Makes shakyHands element appear in the DOM
+    shakyHands.classList.remove('invisible');
+
+    // Removes shakyHands element from the DOM after 1s
+    removeShakyHands();
+
+    // Makes the humanScoreDisplay and computerScoreDisplay appear in the DOM after 1s
+    displayScores();
+
+    // Makes the result appear after shakyHands disappear from the DOM
+    displayResult();
 };
 
-//the restart button after winning the game
-winRestart.addEventListener('click', () => {
+// Function to reset the game state
+function resetGame() {
     winResultPage.classList.add('invisible');
-    gamePage.classList.remove('invisible');
-    playerChoiceDisplay.innerHTML = '';
-    computerChoiceDisplay.innerHTML = '';
-    resultText.innerText = '';
-    humanScore = 0;
-    computerScore = 0;
-    playerCountNumber.innerText = '';
-    computerCountNumber.innerText = '';
-    humanScoreDisplay.classList.add('invisible');
-    computerScoreDisplay.classList.add('invisible');
-    resultVariable.innerText = '';
-});
-
-//the restart buffon after losing the game
-loseRestart.addEventListener('click', () => {
     loseResultPage.classList.add('invisible');
     gamePage.classList.remove('invisible');
     playerChoiceDisplay.innerHTML = '';
@@ -180,7 +165,11 @@ loseRestart.addEventListener('click', () => {
     humanScoreDisplay.classList.add('invisible');
     computerScoreDisplay.classList.add('invisible');
     resultVariable.innerText = '';
-});
+}
+
+// Event listeners for restart buttons
+winRestart.addEventListener('click', resetGame);
+loseRestart.addEventListener('click', resetGame);
 
 // the variable messages
 let scoresMessages = (playerScore, computerScore) => {
