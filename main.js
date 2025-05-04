@@ -1,6 +1,6 @@
 let nameInput = document.getElementById('nameInput');
 let nameSubmitButton = document.getElementById('nameSubmitButton');
-let humanName = document.getElementById('humanName');
+let humanNameDisplay = document.getElementById('humanNameDisplay');
 let gamePage = document.getElementById('gamePage');
 let landingPage = document.getElementById('landingPage');
 let nameAlert = document.getElementById('nameAlert');
@@ -31,10 +31,13 @@ let humanScore = 0;
 let computerScore = 0;
 let result;
 
-// Logic after clicking the 'continue' button
+// The function handles human name display and game page transition
 nameSubmitButton.addEventListener('click', () => {
-    // playerName is made to appear in the game page
-    humanName.innerText = nameInput.value;
+    if(nameInput.value === '') {
+        humanNameDisplay.innerText = 'Anon';
+    } else {
+        humanNameDisplay.innerText = nameInput.value;
+    }
 
     //makes the landing page to disappear from DOM
     landingPage.classList.add('invisible');
@@ -46,7 +49,6 @@ nameSubmitButton.addEventListener('click', () => {
 // The function generates a random number between 1 and 3,
 // and assigns the corresponding choice to computerChoice
 let getComputerChoice = () => {
-    // let computerChoice
     let randomNumberBetween1and3 = Math.floor(Math.random() * 3 + 1);
     if (randomNumberBetween1and3 === 1) {
         computerChoice = 'rock';
@@ -81,7 +83,6 @@ humanOptions.addEventListener('click', function (event) {
         }
 
         humanChoice = choice;
-
         getComputerChoice();
 
         // Makes the resultDisplay and resultInfo elements invisible in the DOM
@@ -115,15 +116,18 @@ let playRound = (playerChoice, computerChoice) => {
     if (playerChoice === computerChoice) {
         resultText.innerText = 'Tie Game!';
         resultVariable.innerText = '';
+        playerCountNumber.innerText = `${humanScore}`;
+        computerCountNumber.innerText = `${computerScore}`;
     } else if (
         (playerChoice === 'rock' && computerChoice === 'scissors') ||
         (playerChoice === 'scissors' && computerChoice === 'paper') ||
         (playerChoice === 'paper' && computerChoice === 'rock')
     ) {
         if (humanScore === 4) {
-            gamePage.classList.add('invisible');
-            winResultPage.classList.remove('invisible');
-            // playerName2.innerText = nameInput.value;
+            setTimeout(function() {
+                gamePage.classList.add('invisible');
+                loseResultPage.classList.remove('invisible');
+              }, 2000);
         }
         resultText.innerText = `You won! ${playerChoice} beats ${computerChoice}`;
         humanScore++;
@@ -134,9 +138,10 @@ let playRound = (playerChoice, computerChoice) => {
         (computerChoice === 'paper' && playerChoice === 'rock')
     ) {
         if (computerScore === 4) {
-            gamePage.classList.add('invisible');
-            loseResultPage.classList.remove('invisible');
-            // playerName3.innerText = nameInput.value;
+            setTimeout(function() {
+                gamePage.classList.add('invisible');
+                loseResultPage.classList.remove('invisible');
+              }, 2000);
         }
         resultText.innerText = `You lost! ${computerChoice} beats ${playerChoice}`;
         computerScore++;
