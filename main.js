@@ -48,18 +48,15 @@ nameSubmitButton.addEventListener('click', () => {
     gamePage.classList.remove('invisible');
 });
 
-//Generates random choices for Computer
+//Generates random choices of either rock, paper, scissors for Computer
 let getComputerChoice = () => {
-    switch (Math.floor(Math.random() * (3) + 1)){
-        case 1:
-            return 'rock';
-            break;
-        case 2:
-            return 'paper';
-            break;
-        case 3:
-            return 'scissors';
-            break
+    let randomNumberBetween1and3 = Math.floor(Math.random() * (3) + 1);
+    if (randomNumberBetween1and3 === 1){
+        return 'rock';
+    } else if (randomNumberBetween1and3 === 2){
+        return 'paper';
+    } else {
+        return 'scissors';
     }
 }
 
@@ -68,7 +65,10 @@ rockOption.addEventListener('click', () => {
     // assigns the 'Rock' to playerOpton variable
     playerOpton = 'rock';
     // assigns the random value from getComputerChoice function to computerOpton variable
-    computerOpton = getComputerChoice();
+    let computerOpton = getComputerChoice();
+    console.log("get computer choice says: " + getComputerChoice());
+    console.log("computer option is: " +computerOpton);
+
 
     // Makes the resultDisplay and resultInfo elements invisible in the DOM
     resultDisplay.classList.add('invisible');
