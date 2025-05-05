@@ -111,7 +111,7 @@ let playRound = (playerChoice, computerChoice) => {
         if (humanScore === 4) {
             setTimeout(function () {
                 gamePage.classList.add('invisible');
-                loseResultPage.classList.remove('invisible');
+                winResultPage.classList.remove('invisible');
             }, 2000);
         }
         resultText.innerText = `You won! ${playerChoice} beats ${computerChoice}`;
