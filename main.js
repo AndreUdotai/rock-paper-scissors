@@ -28,8 +28,8 @@ let humanScore = 0;
 let computerScore = 0;
 let result;
 
-// The function handles human name display and game page transition
-nameSubmitButton.addEventListener('click', () => {
+let startGame = () => {
+    // Get player name from input
     if (nameInput.value === '') {
         humanNameDisplay.innerText = 'Anon';
     } else {
@@ -39,7 +39,10 @@ nameSubmitButton.addEventListener('click', () => {
     landingPage.classList.add('invisible');
     //Display game page
     gamePage.classList.remove('invisible');
-});
+}
+
+// This 'continute' click event handler transitions the game from the landing page to the game page
+nameSubmitButton.addEventListener('click', startGame);
 
 // The function generates a random number between 1 and 3 for computer choice
 let getComputerChoice = () => {
@@ -92,11 +95,70 @@ let handleHumanOptionsClick = (event) => {
 // The function listens for a click event on the humanOptions element to run the game
 humanOptions.addEventListener('click', handleHumanOptionsClick);
 
+let addShakyHands = () => {
+    // Adds the 'shakyHands' class to the shakyHands element
+    shakyHands.classList.add('shakyHands');
+}
+
+// Removes shakyHands element from the DOM after 1s
+let removeShakyHands = () => {
+    setTimeout(() => {
+        shakyHands.classList.add('invisible');
+    }, 1000);
+};
+
+let displayPlayerAndComputerChoiceIcons = () => {
+    // Makes human and computer choice icons appear in the DOM
+    playerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${humanChoice} fa-flip-horizontal choiceIcons"></i>`;
+    computerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${computerChoice} choiceIcons"></i>`;
+} 
+
+// Makes humanScoreDisplay and computerScoreDisplay elements appear on the DOM after 1s
+let displayScores = () => {
+    setTimeout(() => {
+        humanScoreDisplay.classList.remove('invisible');
+        computerScoreDisplay.classList.remove('invisible');
+    }, 1000);
+};
+
+// Makes the result appear after 1s
+let displayResult = () => {
+    setTimeout(() => {
+        resultDisplay.classList.remove('invisible');
+        resultInfo.classList.remove('invisible');
+    }, 1000);
+};
+
+// the score messages
+let scoresMessages = (playerScore, computerScore) => {
+    resultVariable.innerText = '';
+    if (playerScore === 1 && computerScore === 0) {
+        resultVariable.innerText = 'Lets go!!!';
+    } else if (playerScore - computerScore === 2) {
+        resultVariable.innerText = "You're pretty good at this.";
+    } else if (computerScore === 1 && playerScore === 0) {
+        resultVariable.innerText = 'Oh no.';
+    } else if (computerScore === 2 && computerScore > playerScore) {
+        resultVariable.innerText = 'Arghh. Give it another shot';
+    } else if (playerScore === 3 && playerScore > computerScore) {
+        resultVariable.innerText = "You're proving humans are better.";
+    } else if (playerScore === computerScore && playerScore > 2) {
+        resultVariable.innerText = "It's ok. You got this.";
+    } else if (computerScore === 4) {
+        resultVariable.innerText =
+            "Oh no. It's match point. Don't let us down.";
+    } else if (playerScore === 4) {
+        resultVariable.innerText = 'One more and you are a hero.';
+    } else if (playerScore === computerScore) {
+        resultVariable.innerText = '';
+    } else {
+        resultVariable.innerText = 'You can do this!';
+    }
+};
+
 // The function plays a round of the game and updates the score and displays the result message accordingly
 let playRound = (playerChoice, computerChoice) => {
-    // Assigns playerChoiceDisplay and computerChoiceDisplay icons to the elements' innerHTML
-    playerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${playerChoice} fa-flip-horizontal choiceIcons"></i>`;
-    computerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${computerChoice} choiceIcons"></i>`;
+    displayPlayerAndComputerChoiceIcons();
 
     if (playerChoice === computerChoice) {
         resultText.innerText = 'Tie Game!';
@@ -138,7 +200,7 @@ let playRound = (playerChoice, computerChoice) => {
     resultInfo.classList.add('invisible');
 
     // Makes shakyHands element appear in the DOM
-    shakyHands.classList.remove('invisible');
+    addShakyHands();
 
     // Removes shakyHands element from the DOM after 1s
     removeShakyHands();
@@ -171,52 +233,8 @@ function resetGame() {
 winRestart.addEventListener('click', resetGame);
 loseRestart.addEventListener('click', resetGame);
 
-// the variable messages
-let scoresMessages = (playerScore, computerScore) => {
-    resultVariable.innerText = '';
-    if (playerScore === 1 && computerScore === 0) {
-        resultVariable.innerText = 'Lets go!!!';
-    } else if (playerScore - computerScore === 2) {
-        resultVariable.innerText = "You're pretty good at this.";
-    } else if (computerScore === 1 && playerScore === 0) {
-        resultVariable.innerText = 'Oh no.';
-    } else if (computerScore === 2 && computerScore > playerScore) {
-        resultVariable.innerText = 'Arghh. Give it another shot';
-    } else if (playerScore === 3 && playerScore > computerScore) {
-        resultVariable.innerText = "You're proving humans are better.";
-    } else if (playerScore === computerScore && playerScore > 2) {
-        resultVariable.innerText = "It's ok. You got this.";
-    } else if (computerScore === 4) {
-        resultVariable.innerText =
-            "Oh no. It's match point. Don't let us down.";
-    } else if (playerScore === 4) {
-        resultVariable.innerText = 'One more and you are a hero.';
-    } else if (playerScore === computerScore) {
-        resultVariable.innerText = '';
-    } else {
-        resultVariable.innerText = 'You can do this!';
-    }
-};
 
-// Removes shakyHands element from the DOM after 1s
-let removeShakyHands = () => {
-    setTimeout(() => {
-        shakyHands.classList.add('invisible');
-    }, 1000);
-};
 
-// Makes humanScoreDisplay and computerScoreDisplay elements appear on the DOM after 1s
-let displayScores = () => {
-    setTimeout(() => {
-        humanScoreDisplay.classList.remove('invisible');
-        computerScoreDisplay.classList.remove('invisible');
-    }, 1000);
-};
 
-// Makes the result appear after 1s
-let displayResult = () => {
-    setTimeout(() => {
-        resultDisplay.classList.remove('invisible');
-        resultInfo.classList.remove('invisible');
-    }, 1000);
-};
+
+
