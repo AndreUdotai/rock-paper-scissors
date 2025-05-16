@@ -1,33 +1,33 @@
-let nameInput           = document.getElementById('nameInput');
-let nameSubmitButton    = document.getElementById('nameSubmitButton');
-let playerName1         = document.getElementById('playerName1');
-let playerName2         = document.getElementById('playerName2');
-let playerName3         = document.getElementById('playerName3');
-let gamePage            = document.getElementById('gamePage');
-let landingPage         = document.getElementById('landingPage');
-let nameAlert           = document.getElementById('nameAlert');
-let resultText          = document.getElementById('resultText');
-let resultVariable      = document.getElementById('resultVariable');
-let playerScores        = document.getElementById('playerScores');
-let computerScores      = document.getElementById('computerScores');
-let playerCountNumber   = document.getElementById('playerCountNumber');
-let computerCountNumber = document.getElementById('computerCountNumber');
-let winResultPage             = document.getElementById('winResultPage');
-let loseResultPage            = document.getElementById('loseResultPage');
-let winRestart          = document.getElementById('winRestart');
-let loseRestart         = document.getElementById('loseRestart');
+let nameInput           = document.querySelector('#nameInput');
+let nameSubmitButton    = document.querySelector('#nameSubmitButton');
+let playerName1         = document.querySelector('#playerName1');
+let playerName2         = document.querySelector('#playerName2');
+let playerName3         = document.querySelector('#playerName3');
+let gamePage            = document.querySelector('#gamePage');
+let landingPage         = document.querySelector('#landingPage');
+let nameAlert           = document.querySelector('#nameAlert');
+let resultText          = document.querySelector('#resultText');
+let resultVariable      = document.querySelector('#resultVariable');
+let playerScores        = document.querySelector('#playerScores');
+let computerScores      = document.querySelector('#computerScores');
+let playerCountNumber   = document.querySelector('#playerCountNumber');
+let computerCountNumber = document.querySelector('#computerCountNumber');
+let winResultPage       = document.querySelector('#winResultPage');
+let loseResultPage      = document.querySelector('#loseResultPage');
+let winRestart          = document.querySelector('#winRestart');
+let loseRestart         = document.querySelector('#loseRestart');
 
-let shakyHands          = document.getElementById('shakyHands')
+let shakyHands          = document.querySelector('#shakyHands')
 
-let resultDisplay       = document.getElementById('resultDisplay');
-let resultInfo          = document.getElementById('resultInfo');
+let resultDisplay       = document.querySelector('#resultDisplay');
+let resultInfo          = document.querySelector('#resultInfo');
 
-let rockOption          = document.getElementById('rockOption');
-let paperOption         = document.getElementById('paperOption');
-let scissorsOption      = document.getElementById('scissorsOption');
+let rockOption          = document.querySelector('#rockOption');
+let paperOption         = document.querySelector('#paperOption');
+let scissorsOption      = document.querySelector('#scissorsOption');
 
-let playerChoice        = document.getElementById('playerChoice');
-let computerChoice      = document.getElementById('computerChoice');
+let playerChoice        = document.querySelector('#playerChoice');
+let computerChoice      = document.querySelector('#computerChoice');
 
 let playerSelection;
 let computerOpton;
