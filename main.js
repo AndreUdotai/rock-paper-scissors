@@ -16,16 +16,12 @@ let winResultPage       = document.querySelector('#winResultPage');
 let loseResultPage      = document.querySelector('#loseResultPage');
 let winRestart          = document.querySelector('#winRestart');
 let loseRestart         = document.querySelector('#loseRestart');
-
 let shakyHands          = document.querySelector('#shakyHands')
-
 let resultDisplay       = document.querySelector('#resultDisplay');
 let resultInfo          = document.querySelector('#resultInfo');
-
 let rockOption          = document.querySelector('#rockOption');
 let paperOption         = document.querySelector('#paperOption');
 let scissorsOption      = document.querySelector('#scissorsOption');
-
 let playerChoice        = document.querySelector('#playerChoice');
 let computerChoice      = document.querySelector('#computerChoice');
 
