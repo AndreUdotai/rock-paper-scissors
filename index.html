@@ -54,7 +54,7 @@
             <div>
                 <div class="row">
                     <div class="col-12 mb-4">
-                        <h1><span id="playerName1"></span> vs Cyborg</h1>
+                        <h1><span id="humanNameDisplay"></span> vs Cyborg</h1>
                     </div>
                 </div>
     
@@ -70,7 +70,7 @@
                     </div>
                 </div>
     
-                <div class="row px-3 my-4 mx-auto">
+                <div class="row px-3 my-4 mx-auto" id="humanOptions">
                     <div class="col-4">
                         <i class="fas fa-hand-rock choiceIcons" id="rockOption"></i>
                     </div>
@@ -95,13 +95,13 @@
     
                 <div class="row pt-4" id="resultDisplay">
                     <div class="col-6">
-                        <p class="h4 invisible" id="playerScores">You: <span id="playerCountNumber">0</span></p>
-                        <div id="playerChoice">
+                        <p class="h4 invisible" id="humanScoreDisplay">You: <span id="playerCountNumber">0</span></p>
+                        <div id="playerChoiceDisplay">
                         </div>
                     </div>
                     <div class="col-6">
-                        <p class="h4 invisible" id="computerScores">Cyborg: <span id="computerCountNumber">0</span></p>
-                        <div id="computerChoice">
+                        <p class="h4 invisible" id="computerScoreDisplay">Cyborg: <span id="computerCountNumber">0</span></p>
+                        <div id="computerChoiceDisplay">
                         </div>
                     </div>
                 </div>
@@ -123,11 +123,6 @@
 
         <!-- SECTION 3: WIN RESULT PAGE -->
         <div id="winResultPage" class="text-center invisible">
-            <div class="row text-center">
-                <div class="col-12">
-                    <h1><span id="playerName2"></span> vs Cyborg</h1>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-12 resultMessage">
                     <p class="h4">You won! AI can never overtake man...</p>
@@ -142,11 +137,6 @@
 
         <!-- SECTION 4: LOSE RESULT PAGE -->
         <div id="loseResultPage" class="text-center invisible">
-            <div class="row text-center">
-                <div class="col-12 mt-4">
-                    <h1><span id="playerName3"></span> vs Cyborg</h1>
-                </div>
-            </div>
             <div class="row resultMessage">
                 <div class="col-12">
                     <p class="h4">You lost! Cyborg will have your head for dinner...</p>
