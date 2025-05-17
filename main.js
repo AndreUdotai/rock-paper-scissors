@@ -34,11 +34,15 @@ let result;
 
 let startGame = () => {
     // Get player name from input
+    let playerName;
     if (nameInput.value === '') {
-        humanNameDisplay.innerText = 'Anon';
+        playerName = 'Anon'
     } else {
-        humanNameDisplay.innerText = nameInput.value;
+        playerName = nameInput.value;
     }
+    localStorage.setItem('playerName', playerName);
+    humanNameDisplay.innerText = playerName;
+    // const storedName = localStorage.getItem('playerName');
     //Hide landing page from view
     landingPage.classList.add('invisible');
     //Display game page
@@ -58,7 +62,7 @@ nameInput.addEventListener('keypress', (event) => {
 
 // ********************************************************************************************
 
-// The function generates a random number between 1 and 3 for computer choice
+// Generare a random number between 1 and 3 to get the computer choice
 let getComputerChoice = () => {
     let randomNumberBetween1and3 = Math.floor(Math.random() * 3 + 1);
     switch (randomNumberBetween1and3) {
@@ -74,12 +78,11 @@ let getComputerChoice = () => {
     }
 };
 
-// The function gets the human choice based on the clicked element
+// A user should be able to choose by clicking on one of three icons (rock, paper or scissors)
 let getHumanChoice = (event) => {
     // Check if the clicked element is one of the choice icons
     const clickedElement = event.target;
     console.log(clickedElement);
-    // if (clickedElement.classList.contains('choiceIcons')) {
         // Determine which option was clicked based on ID
         switch (clickedElement.id) {
             case 'rockOption':
@@ -95,7 +98,6 @@ let getHumanChoice = (event) => {
             default:
                 humanChoice = 'unknown';
         }
-    // }
     if(humanChoice === 'rock' || humanChoice === 'paper' || humanChoice === 'scissors') {
         return humanChoice;
     }
