@@ -28,6 +28,10 @@ let humanScore = 0;
 let computerScore = 0;
 let result;
 
+// ********************************************************************************************
+// A user should be able to enter a name and click on a button to continue the game
+// ********************************************************************************************
+
 let startGame = () => {
     // Get player name from input
     if (nameInput.value === '') {
@@ -41,8 +45,18 @@ let startGame = () => {
     gamePage.classList.remove('invisible');
 };
 
-// This 'continute' click event handler transitions the game from the landing page to the game page
+// This 'continue' click event handler transitions the game from the landing page to the game page
 nameSubmitButton.addEventListener('click', startGame);
+
+// The user should also be able to continue to the game by pressing the return key on the keyboard
+nameInput.addEventListener('keypress', (event) => {
+    if(event.key === 'Enter') {
+        event.preventDefault();
+        nameSubmitButton.click();
+    }
+});
+
+// ********************************************************************************************
 
 // The function generates a random number between 1 and 3 for computer choice
 let getComputerChoice = () => {
