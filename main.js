@@ -20,6 +20,8 @@ let resultInfo = document.querySelector('#resultInfo');
 let humanOptions = document.getElementById('humanOptions');
 let playerChoiceDisplay = document.querySelector('#playerChoiceDisplay');
 let computerChoiceDisplay = document.querySelector('#computerChoiceDisplay');
+let makeYourChoice = document.querySelector('#makeYourChoice');
+let resultMessage = document.querySelector('#resultMessage');
 
 // Variables to store human and computer choices and scores
 let humanChoice;
@@ -80,6 +82,7 @@ let getComputerChoice = () => {
 
 // A user should be able to choose by clicking on one of three icons (rock, paper or scissors)
 let getHumanChoice = (event) => {
+    makeYourChoice.classList.add('invisible');
     // Check if the clicked element is one of the choice icons
     const clickedElement = event.target;
     console.log(clickedElement);
@@ -114,12 +117,14 @@ humanOptions.addEventListener('click', handleHumanOptionsClick);
 let addShakyHands = () => {
     shakyHands.classList.remove('invisible');
     humanOptions.classList.add('invisible');
+    resultMessage.classList.add('invisible');
 }
 
 let removeShakyHands = () => {
     setTimeout(() => {
         shakyHands.classList.add('invisible');
         humanOptions.classList.remove('invisible');
+        resultMessage.classList.remove('invisible');
     }, 1000);
 };
 

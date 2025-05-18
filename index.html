@@ -63,9 +63,34 @@
                         <p>first to get to 5 wins!</p>
                     </div>
                 </div>
-    
-                <div class="row">
+
+                <div class="row mt-4" id="resultInfo">
                     <div class="col-12">
+                        <p class="h5"><span id="resultText"></span></span></p>
+                    </div>
+                </div>
+
+                <div class="row pt-4" id="resultDisplay">
+                    <div class="col-6">
+                        <p class="h4 invisible" id="humanScoreDisplay">You: <span id="playerCountNumber">0</span></p>
+                        <div id="playerChoiceDisplay">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <p class="h4 invisible" id="computerScoreDisplay">Cyborg: <span id="computerCountNumber">0</span></p>
+                        <div id="computerChoiceDisplay">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4" id="resultMessage">
+                    <div class="col-12">
+                        <p class="h5"><span id="resultVariable"></span></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12" id="makeYourChoice">
                         <p class="h3">Make your choice</p>
                     </div>
                 </div>
@@ -90,25 +115,6 @@
                         <span class="fa-rotate-90" style="display: inline-block;">
                             <i class="fas fa-hand-rock fa-flip-vertical choiceIcons"></i>
                         </span>
-                    </div>
-                </div>
-    
-                <div class="row pt-4" id="resultDisplay">
-                    <div class="col-6">
-                        <p class="h4 invisible" id="humanScoreDisplay">You: <span id="playerCountNumber">0</span></p>
-                        <div id="playerChoiceDisplay">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <p class="h4 invisible" id="computerScoreDisplay">Cyborg: <span id="computerCountNumber">0</span></p>
-                        <div id="computerChoiceDisplay">
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="row mt-4" id="resultInfo">
-                    <div class="col-12">
-                        <p class="h5"><span id="resultVariable"></span><br><span id="resultText"></span></p>
                     </div>
                 </div>
             </div>
