@@ -86,8 +86,8 @@ let getHumanChoice = (event) => {
         // Determine which option was clicked based on ID
         switch (clickedElement.id) {
             case 'rockOption':
-                console.log('rockOption');
                 humanChoice= 'rock';
+                console.log(humanChoice);
                 break;
             case 'paperOption':
                 humanChoice = 'paper';
@@ -98,15 +98,9 @@ let getHumanChoice = (event) => {
             default:
                 humanChoice = 'unknown';
         }
-    if(humanChoice === 'rock' || humanChoice === 'paper' || humanChoice === 'scissors') {
-        return humanChoice;
-    }
-    
 };
 
-// When player chooses Rock icon
 let handleHumanOptionsClick = (event) => {
-    
     getHumanChoice(event);
     getComputerChoice();
 
@@ -117,16 +111,26 @@ let handleHumanOptionsClick = (event) => {
 // The function listens for a click event on the humanOptions element to run the game
 humanOptions.addEventListener('click', handleHumanOptionsClick);
 
+let addShakyHands = () => {
+    shakyHands.classList.remove('invisible');
+    humanOptions.classList.add('invisible');
+}
+
+let removeShakyHands = () => {
+    setTimeout(() => {
+        shakyHands.classList.add('invisible');
+        humanOptions.classList.remove('invisible');
+    }, 1000);
+};
+
+
 let displayPlayerAndComputerChoiceIcons = () => {
     // Makes human and computer choice icons appear in the DOM
     playerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${humanChoice} fa-flip-horizontal choiceIcons"></i>`;
     computerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${computerChoice} choiceIcons"></i>`;
 };
 
-let addShakyHands = () => {
-    // Adds the 'shakyHands' class to the shakyHands element
-    shakyHands.classList.remove('invisible');
-}
+
 
 // The function plays a round of the game and updates the score and displays the result message accordingly
 let playRound = (humanChoice, computerChoice) => {
@@ -240,12 +244,6 @@ let scoresMessages = (playerScore, computerScore) => {
     }
 };
 
-// Removes shakyHands element from the DOM after 1s
-let removeShakyHands = () => {
-    setTimeout(() => {
-        shakyHands.classList.add('invisible');
-    }, 1000);
-};
 
 // Makes humanScoreDisplay and computerScoreDisplay elements appear on the DOM after 1s
 let displayScores = () => {
