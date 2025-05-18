@@ -1,10 +1,9 @@
 let nameInput = document.querySelector('#nameInput');
-let nameSubmitButton = document.querySelector('#nameSubmitButton');
+let continueButton = document.querySelector('#continueButton');
 let humanNameDisplay = document.querySelector('#humanNameDisplay');
 let gamePage = document.querySelector('#gamePage');
 let landingPage = document.querySelector('#landingPage');
 let nameAlert = document.querySelector('#nameAlert');
-let resultText = document.querySelector('#resultText');
 let resultVariable = document.querySelector('#resultVariable');
 let humanScoreDisplay = document.querySelector('#humanScoreDisplay');
 let computerScoreDisplay = document.querySelector('#computerScoreDisplay');
@@ -15,11 +14,9 @@ let loseResultPage = document.querySelector('#loseResultPage');
 let winRestart = document.querySelector('#winRestart');
 let loseRestart = document.querySelector('#loseRestart');
 let shakyHands = document.querySelector('#shakyHands');
-let resultDisplay = document.querySelector('#resultDisplay');
 let resultInfo = document.querySelector('#resultInfo');
+let resultText = document.querySelector('#resultText');
 let humanOptions = document.getElementById('humanOptions');
-let playerChoiceDisplay = document.querySelector('#playerChoiceDisplay');
-let computerChoiceDisplay = document.querySelector('#computerChoiceDisplay');
 let makeYourChoice = document.querySelector('#makeYourChoice');
 let resultMessage = document.querySelector('#resultMessage');
 
@@ -30,35 +27,44 @@ let humanScore = 0;
 let computerScore = 0;
 let result;
 
+// The winning combinations for the game
+const winningCombos = {
+    rock: 'scissors',
+    scissors: 'paper',
+    paper: 'rock'
+};
+
 // ********************************************************************************************
 // A user should be able to enter a name and click on a button to continue the game
 // ********************************************************************************************
 
-let startGame = () => {
-    // Get player name from input
+let getPlayerName = () => {
     let playerName;
     if (nameInput.value === '') {
-        playerName = 'Anon'
+        playerName = 'Anon';
     } else {
         playerName = nameInput.value;
     }
-    localStorage.setItem('playerName', playerName);
-    humanNameDisplay.innerText = playerName;
-    // const storedName = localStorage.getItem('playerName');
-    //Hide landing page from view
-    landingPage.classList.add('invisible');
+    return playerName;
+};
+
+let enterGamePage = () => {
     //Display game page
     gamePage.classList.remove('invisible');
+    const playerName = getPlayerName();
+    humanNameDisplay.innerText = playerName;
+    //Hide landing page from view
+    landingPage.classList.add('invisible');
 };
 
 // This 'continue' click event handler transitions the game from the landing page to the game page
-nameSubmitButton.addEventListener('click', startGame);
+continueButton.addEventListener('click', enterGamePage);
 
 // The user should also be able to continue to the game by pressing the return key on the keyboard
 nameInput.addEventListener('keypress', (event) => {
-    if(event.key === 'Enter') {
+    if (event.key === 'Enter') {
         event.preventDefault();
-        nameSubmitButton.click();
+        continueButton.click();
     }
 });
 
@@ -67,7 +73,7 @@ nameInput.addEventListener('keypress', (event) => {
 // When the user selects a choice, the computer should randomly make a choice automatically
 // ********************************************************************************************
 
-// Generare a random number between 1 and 3 to get the computer choice
+// Generate a random number between 1 and 3 to get the computer choice
 let getComputerChoice = () => {
     let randomNumberBetween1and3 = Math.floor(Math.random() * 3 + 1);
     switch (randomNumberBetween1and3) {
@@ -85,31 +91,31 @@ let getComputerChoice = () => {
 
 // A user should be able to choose by clicking on one of three icons (rock, paper or scissors)
 let getHumanChoice = (event) => {
-    makeYourChoice.classList.add('invisible');
     // Check if the clicked element is one of the choice icons
     const clickedElement = event.target;
-        // Determine which option was clicked based on ID
-        switch (clickedElement.id) {
-            case 'rockOption':
-                humanChoice= 'rock';
-                break;
-            case 'paperOption':
-                humanChoice = 'paper';
-                break;
-            case 'scissorsOption':
-                humanChoice = 'scissors';
-                break;
-            default:
-                humanChoice = 'unknown';
-        }
+    // Determine which option was clicked based on ID
+    switch (clickedElement.id) {
+        case 'rockOption':
+            humanChoice = 'rock';
+            break;
+        case 'paperOption':
+            humanChoice = 'paper';
+            break;
+        case 'scissorsOption':
+            humanChoice = 'scissors';
+            break;
+        default:
+            humanChoice = 'unknown';
+    }
 };
 
 let handleHumanOptionsClick = (event) => {
     getHumanChoice(event);
     getComputerChoice();
 
-    // controls the display of choice icons, scores and result messages
-    if(humanChoice !== 'unknown') {
+    // controls the display of choice icons, scores and result messages for valid human choices
+    if (humanChoice !== 'unknown') {
+        makeYourChoice.classList.add('invisible');
         playRound(humanChoice, computerChoice);
     }
 };
@@ -117,40 +123,42 @@ let handleHumanOptionsClick = (event) => {
 // The function listens for a click event on the humanOptions element to run the game
 humanOptions.addEventListener('click', handleHumanOptionsClick);
 
-let addShakyHands = () => {
+let displayShakyHands = () => {
     shakyHands.classList.remove('invisible');
-    humanOptions.classList.add('invisible');
+    resultInfo.classList.add('invisible');
     resultMessage.classList.add('invisible');
-}
+    humanOptions.classList.add('invisible');
+};
 
 let removeShakyHands = () => {
     setTimeout(() => {
         shakyHands.classList.add('invisible');
-        humanOptions.classList.remove('invisible');
+        resultInfo.classList.remove('invisible');
         resultMessage.classList.remove('invisible');
+        humanOptions.classList.remove('invisible');
+        // Makes human and computer choice icons appear in the DOM
+        resultInfo.querySelector(
+            '#playerChoiceDisplay',
+        ).innerHTML = `<i class="fas fa-hand-${humanChoice} fa-flip-horizontal choiceIcons"></i>`;
+        resultInfo.querySelector(
+            '#computerChoiceDisplay',
+        ).innerHTML = `<i class="fas fa-hand-${computerChoice} choiceIcons"></i>`;
     }, 1000);
-};
-
-let displayPlayerAndComputerChoiceIcons = () => {
-    // Makes human and computer choice icons appear in the DOM
-    playerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${humanChoice} fa-flip-horizontal choiceIcons"></i>`;
-    computerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${computerChoice} choiceIcons"></i>`;
 };
 
 // The function plays a round of the game and updates the score and displays the result message accordingly
 let playRound = (humanChoice, computerChoice) => {
-    displayPlayerAndComputerChoiceIcons();
+    // Makes shakyHands element appear in the DOM
+    displayShakyHands();
+    // Removes shakyHands element from the DOM after 1s
+    removeShakyHands();
 
     if (humanChoice === computerChoice) {
         resultText.innerText = 'Tie Game!';
         resultVariable.innerText = '';
         playerCountNumber.innerText = `${humanScore}`;
         computerCountNumber.innerText = `${computerScore}`;
-    } else if (
-        (humanChoice === 'rock' && computerChoice === 'scissors') ||
-        (humanChoice === 'scissors' && computerChoice === 'paper') ||
-        (humanChoice === 'paper' && computerChoice === 'rock')
-    ) {
+    } else if ( winningCombos[humanChoice] === computerChoice) {
         if (humanScore === 4) {
             setTimeout(function () {
                 gamePage.classList.add('invisible');
@@ -160,11 +168,7 @@ let playRound = (humanChoice, computerChoice) => {
         resultText.innerText = `You won! ${humanChoice} beats ${computerChoice}`;
         humanScore++;
         playerCountNumber.innerText = `${humanScore}`;
-    } else if (
-        (computerChoice === 'rock' && humanChoice === 'scissors') ||
-        (computerChoice === 'scissors' && humanChoice === 'paper') ||
-        (computerChoice === 'paper' && humanChoice === 'rock')
-    ) {
+    } else if (winningCombos[computerChoice] === humanChoice){
         if (computerScore === 4) {
             setTimeout(function () {
                 gamePage.classList.add('invisible');
@@ -176,92 +180,46 @@ let playRound = (humanChoice, computerChoice) => {
         computerCountNumber.innerText = `${computerScore}`;
     }
     scoresMessages(humanScore, computerScore);
-    // Makes the resultDisplay and resultInfo elements invisible in the DOM
-    resultDisplay.classList.add('invisible');
-    resultInfo.classList.add('invisible');
-
-    // Makes shakyHands element appear in the DOM
-    addShakyHands();
-    // Removes shakyHands element from the DOM after 1s
-    removeShakyHands();
-    // Makes the humanScoreDisplay and computerScoreDisplay appear in the DOM after 1s
-    displayScores();
-    // Makes the result appear after shakyHands disappear from the DOM
-    displayResult();
 };
 
-//the restart button after winning the game
-winRestart.addEventListener('click', () => {
+let gameReset = () => {
+    gamePage.classList.remove('invisible');
+    humanScore = 0;
+    computerScore = 0;
+    resultInfo.classList.add('invisible');
+    resultVariable.innerText = '';
     winResultPage.classList.add('invisible');
-    gamePage.classList.remove('invisible');
-    playerChoiceDisplay.innerHTML = '';
-    computerChoiceDisplay.innerHTML = '';
-    resultText.innerText = '';
-    humanScore = 0;
-    computerScore = 0;
-    playerCountNumber.innerText = '';
-    computerCountNumber.innerText = '';
-    humanScoreDisplay.classList.add('invisible');
-    computerScoreDisplay.classList.add('invisible');
-    resultVariable.innerText = '';
-});
-
-//the restart buffon after losing the game
-loseRestart.addEventListener('click', () => {
     loseResultPage.classList.add('invisible');
-    gamePage.classList.remove('invisible');
-    playerChoiceDisplay.innerHTML = '';
-    computerChoiceDisplay.innerHTML = '';
-    resultText.innerText = '';
-    humanScore = 0;
-    computerScore = 0;
-    playerCountNumber.innerText = '';
-    computerCountNumber.innerText = '';
-    humanScoreDisplay.classList.add('invisible');
-    computerScoreDisplay.classList.add('invisible');
-    resultVariable.innerText = '';
-});
+    makeYourChoice.classList.remove('invisible');
+}
+
+winRestart.addEventListener('click', gameReset);
+loseRestart.addEventListener('click', gameReset);
 
 // the variable messages
 let scoresMessages = (playerScore, computerScore) => {
-    resultVariable.innerText = '';
+    let message;
     if (playerScore === 1 && computerScore === 0) {
-        resultVariable.innerText = 'Lets go!!!';
+        message = 'Lets go!!!';
     } else if (playerScore - computerScore === 2) {
-        resultVariable.innerText = "You're pretty good at this.";
+        message = "You're pretty good at this.";
     } else if (computerScore === 1 && playerScore === 0) {
-        resultVariable.innerText = 'Oh no.';
+        message = 'Oh no.';
     } else if (computerScore === 2 && computerScore > playerScore) {
-        resultVariable.innerText = 'Arghh. Give it another shot';
+        message = 'Arghh. Give it another shot';
     } else if (playerScore === 3 && playerScore > computerScore) {
-        resultVariable.innerText = "You're proving humans are better.";
+        message = "You're proving humans are better.";
     } else if (playerScore === computerScore && playerScore > 2) {
-        resultVariable.innerText = "It's ok. You got this.";
+        message = "It's ok. You got this.";
     } else if (computerScore === 4) {
-        resultVariable.innerText =
+        message =
             "Oh no. It's match point. Don't let us down.";
     } else if (playerScore === 4) {
-        resultVariable.innerText = 'One more and you are a hero.';
+        message = 'One more and you are a hero.';
     } else if (playerScore === computerScore) {
-        resultVariable.innerText = '';
+        message = 'Take the lead!';
     } else {
-        resultVariable.innerText = 'You can do this!';
+        message = 'You can do this!';
     }
-};
-
-
-// Makes humanScoreDisplay and computerScoreDisplay elements appear on the DOM after 1s
-let displayScores = () => {
-    setTimeout(() => {
-        humanScoreDisplay.classList.remove('invisible');
-        computerScoreDisplay.classList.remove('invisible');
-    }, 1000);
-};
-
-// Makes the result appear after 1s
-let displayResult = () => {
-    setTimeout(() => {
-        resultDisplay.classList.remove('invisible');
-        resultInfo.classList.remove('invisible');
-    }, 1000);
+    return resultVariable.innerText = message;
 };

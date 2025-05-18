@@ -42,7 +42,7 @@
                     <h4>IN A ROCK PAPER SCISSORS GAME</h4>
                 </div>
                 <input type="text" placeholder="Your name.." id="nameInput">
-                <button type="button" id="nameSubmitButton">Continue...</button>
+                <button type="button" id="continueButton">Continue...</button>
             </div>
             <div class="footer">
                 <p>Copyright © <a href="https://github.com/AndreUdotai/rock-paper-scissors" target="_blank" rel="noopener noreferrer">Andre Udotai</a> 2025</p>
@@ -64,22 +64,17 @@
                     </div>
                 </div>
 
-                <div class="row mt-4" id="resultInfo">
+                <div class="row mt-4 invisible" id="resultInfo">
                     <div class="col-12">
                         <p class="h5"><span id="resultText"></span></span></p>
                     </div>
-                </div>
-
-                <div class="row pt-4" id="resultDisplay">
                     <div class="col-6">
-                        <p class="h4 invisible" id="humanScoreDisplay">You: <span id="playerCountNumber">0</span></p>
-                        <div id="playerChoiceDisplay">
-                        </div>
+                        <p class="h4" id="humanScoreDisplay">You: <span id="playerCountNumber">0</span></p>
+                        <div id="playerChoiceDisplay"></div>
                     </div>
                     <div class="col-6">
-                        <p class="h4 invisible" id="computerScoreDisplay">Cyborg: <span id="computerCountNumber">0</span></p>
-                        <div id="computerChoiceDisplay">
-                        </div>
+                        <p class="h4" id="computerScoreDisplay">Cyborg: <span id="computerCountNumber">0</span></p>
+                        <div id="computerChoiceDisplay"></div>
                     </div>
                 </div>
 

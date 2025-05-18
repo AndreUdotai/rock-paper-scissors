@@ -61,7 +61,7 @@ html, body {
 }
 
 /* Style the button */
-#nameSubmitButton {
+#continueButton {
     max-width: 200px; /* Set a reasonable width for desktop */
     width: 100%; /* Allow it to scale down within the max-width */
     padding: 10px; /* Add padding for a "normal" look */
@@ -74,7 +74,7 @@ html, body {
     align-self: center; /* Center the button within the flex container */
 }
 
-#nameSubmitButton:hover {
+#continueButton:hover {
     background-color: rgb(79, 122, 158); /* Slightly darker green on hover */
 }
 
@@ -92,7 +92,7 @@ html, body {
         font-size: 14px; /* Slightly smaller text */
     }
 
-    #nameSubmitButton {
+    #continueButton {
         max-width: 150px; /* Slightly smaller on mobile */
         font-size: 14px; /* Slightly smaller text */
     }
