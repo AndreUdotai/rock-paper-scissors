@@ -63,6 +63,9 @@ nameInput.addEventListener('keypress', (event) => {
 });
 
 // ********************************************************************************************
+// A user should be able to choose by clicking on one of three icons (rock, paper or scissors)
+// When the user selects a choice, the computer should randomly make a choice automatically
+// ********************************************************************************************
 
 // Generare a random number between 1 and 3 to get the computer choice
 let getComputerChoice = () => {
@@ -85,12 +88,10 @@ let getHumanChoice = (event) => {
     makeYourChoice.classList.add('invisible');
     // Check if the clicked element is one of the choice icons
     const clickedElement = event.target;
-    console.log(clickedElement);
         // Determine which option was clicked based on ID
         switch (clickedElement.id) {
             case 'rockOption':
                 humanChoice= 'rock';
-                console.log(humanChoice);
                 break;
             case 'paperOption':
                 humanChoice = 'paper';
@@ -108,7 +109,9 @@ let handleHumanOptionsClick = (event) => {
     getComputerChoice();
 
     // controls the display of choice icons, scores and result messages
-    playRound(humanChoice, computerChoice);
+    if(humanChoice !== 'unknown') {
+        playRound(humanChoice, computerChoice);
+    }
 };
 
 // The function listens for a click event on the humanOptions element to run the game
@@ -128,14 +131,11 @@ let removeShakyHands = () => {
     }, 1000);
 };
 
-
 let displayPlayerAndComputerChoiceIcons = () => {
     // Makes human and computer choice icons appear in the DOM
     playerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${humanChoice} fa-flip-horizontal choiceIcons"></i>`;
     computerChoiceDisplay.innerHTML = `<i class="fas fa-hand-${computerChoice} choiceIcons"></i>`;
 };
-
-
 
 // The function plays a round of the game and updates the score and displays the result message accordingly
 let playRound = (humanChoice, computerChoice) => {
